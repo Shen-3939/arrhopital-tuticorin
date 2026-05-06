@@ -14,7 +14,7 @@
     header('Content-Type: application/json');
 
     // ── Configuration ──────────────────────────────────────
-    $receiver_email = "support@shentechnology.com"; 
+    $receiver_email = "arrhospitalindia@gmail.com,support@shentechnology.com"; 
     $from_email     = "no-reply@arrhospital.in";  // Use your domain email
     $hospital_name  = "ARR Hospital";
 
