@@ -124,16 +124,17 @@
                     </div>
                 </div>
                 <div class="d-none d-xl-flex flex-shrink-0 ps-4 align-items-center">
-                    <a href="tel:+914612346102"
-                        class="btn btn-light btn-lg-square rounded-circle position-relative me-3">
+                    <a href="tel:04612346102" class="btn btn-light btn-lg-square rounded-circle position-relative me-3">
                         <i class="fa fa-phone-alt fa-flip-horizontal text-primary"></i>
                     </a>
                     <div class="d-flex flex-column">
                         <span class="text-muted" style="font-size: 0.78rem; line-height:1.2;">Call For Queries</span>
                         <div class="d-flex align-items-center gap-2" style="line-height:2;">
-                            <a href="tel:+914612346102" class="text-dark fw-semibold" style="font-size:0.92rem; text-decoration:none;">+0461 234 6102</a>
+                            <a href="tel:+918300646102" class="text-dark fw-semibold"
+                                style="font-size:0.92rem; text-decoration:none;">+91 8300646102</a>
                             <span class="text-muted" style="font-size:0.75rem;">|</span>
-                            <a href="tel:+914612346103" class="text-dark fw-semibold" style="font-size:0.92rem; text-decoration:none;">+0461 234 6103</a>
+                            <a href="tel:04612346102" class="text-dark fw-semibold"
+                                style="font-size:0.92rem; text-decoration:none;">+0461 2346102</a>
                         </div>
                     </div>
                 </div>
@@ -176,7 +177,7 @@
                     <div>
                         <h4 class="lh-base mb-4">Have questions or need an appointment? Fill out the form and our team
                             will get back to you shortly.</h4>
-                        <form id="contactForm">
+                        <form id="contactForm" action="send_mail.php" method="POST">
                             <div class="row g-3">
                                 <div class="col-lg-12 col-xl-6">
                                     <div class="form-floating">
@@ -245,7 +246,8 @@
                                 </div>
                                 <h5 class="mb-2">Mail Us</h5>
                                 <p class="mb-0"><a
-                                        href="mailto:arrhospitalindia@gmail.com">arrhospitalindia@gmail.com</a></p>
+                                        href="mailto:arrhospitaltuticorin@gmail.com">arrhospitaltuticorin@gmail.com</a>
+                                </p>
                             </div>
                         </div>
                         <!-- Phone Card -->
@@ -255,8 +257,9 @@
                                     <i class="fa fa-phone-alt"></i>
                                 </div>
                                 <h5 class="mb-2">Telephone</h5>
-                                <p class="mb-0"><a href="tel:+914612346102">+0461 234 6102</a></p>
-                                <p class="mb-0"><a href="tel:+914612346103">+0461 234 6103</a></p>
+                                <p class="mb-0"><a href="tel:+918300646102">+91 8300646102</a></p>
+                                <p class="mb-0"><a href="tel:04612346102">+0461 234 6102</a></p>
+                                <p class="mb-0"><a href="tel:04612346103">+0461 234 6103</a></p>
                             </div>
                         </div>
                     </div>
@@ -288,11 +291,12 @@
 
                         </p>
                         <div class="footer-btn d-flex">
-                            <a class="btn btn-md-square rounded-circle me-3" href="https://www.facebook.com/p/ARR-Hospital-100064145854622/"><i
+                            <a class="btn btn-md-square rounded-circle me-3"
+                                href="https://www.facebook.com/p/ARR-Hospital-100064145854622/"><i
                                     class="fab fa-facebook-f"></i></a>
 
-                            <a class="btn btn-md-square rounded-circle me-3" href="https://instagram.com/#arrhospital"><i
-                                    class="fab fa-instagram"></i></a>
+                            <a class="btn btn-md-square rounded-circle me-3"
+                                href="https://instagram.com/#arrhospital"><i class="fab fa-instagram"></i></a>
 
                         </div>
                     </div>
@@ -330,7 +334,7 @@
                             </div>
                             <div>
                                 <h5 class="text-white">Mail Us</h5>
-                                <p class="mb-0">arrhospitalindia@gmail.com</p>
+                                <p class="mb-0">arrhospitaltuticorin@gmail.com</p>
                             </div>
                         </div>
                         <div class="d-flex">
@@ -339,8 +343,12 @@
                             </div>
                             <div>
                                 <h5 class="text-white">Telephone</h5>
-                                <p class="mb-0"><a href="tel:+914612346102" style="color:inherit; text-decoration:none;">+0461 234 6102</a></p>
-                                <p class="mb-0"><a href="tel:+914612346103" style="color:inherit; text-decoration:none;">+0461 234 6103</a></p>
+                                <p class="mb-0"><a href="tel:+918300646102"
+                                        style="color:inherit; text-decoration:none;">+91 8300646102</a></p>
+                                <p class="mb-0"><a href="tel:04612346102"
+                                        style="color:inherit; text-decoration:none;">+0461 234 6102</a></p>
+                                <p class="mb-0"><a href="tel:04612346103"
+                                        style="color:inherit; text-decoration:none;">+0461 234 6103</a></p>
                             </div>
                         </div>
                     </div>
@@ -387,60 +395,36 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-
-    <!-- Contact Form Submission -->
     <script>
         $(document).ready(function () {
             $('#contactForm').on('submit', function (e) {
                 e.preventDefault();
-
                 var $btn = $('#submitBtn');
-                var $notification = $('#formNotification');
-                var originalText = $btn.text();
-
-                // Disable button & show loading
-                $btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin me-2"></i>Sending...');
-                $notification.removeClass('success error').hide();
-
+                $btn.prop('disabled', true);
                 $.ajax({
-                    url: 'send_mail.php',
-                    type: 'POST',
+                    url: $(this).attr('action'),
+                    type: $(this).attr('method'),
                     data: $(this).serialize(),
-                    dataType: 'json',
                     success: function (response) {
-                        if (response.status === 'success') {
-                            $notification
-                                .removeClass('error')
-                                .addClass('success')
-                                .html('<i class="fa fa-check-circle"></i>' + response.message)
-                                .show();
-                            $('#contactForm')[0].reset();
+                        var $notif = $('#formNotification');
+                        var msg = response.trim();
+                        if (msg === 'Message sent successfully.') {
+                            $notif.removeClass('error').addClass('success').html('<i class="fa fa-check-circle"></i> ' + msg).show();
                         } else {
-                            $notification
-                                .removeClass('success')
-                                .addClass('error')
-                                .html('<i class="fa fa-exclamation-circle"></i>' + response.message)
-                                .show();
+                            $notif.removeClass('success').addClass('error').html('<i class="fa fa-exclamation-circle"></i> ' + msg).show();
                         }
                     },
                     error: function () {
-                        $notification
-                            .removeClass('success')
-                            .addClass('error')
-                            .html('<i class="fa fa-exclamation-circle"></i>Something went wrong. Please try again later.')
-                            .show();
+                        $('#formNotification').removeClass('success').addClass('error').html('<i class="fa fa-exclamation-circle"></i> An error occurred.').show();
                     },
                     complete: function () {
-                        $btn.prop('disabled', false).text(originalText);
-                        // Auto-hide notification after 8 seconds
-                        setTimeout(function () {
-                            $notification.fadeOut(400);
-                        }, 8000);
+                        $btn.prop('disabled', false);
                     }
                 });
             });
         });
     </script>
+
 </body>
 
 </html>
