@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // ARR Hospital Mail IDs
-    $to = "support@shentechnology.com";
+    $to = "arrhospitaltuticorin@gmail.com";
 
     // Email Headers
     $headers = "From: ARR Hospital Website <no-reply@arrhospital.com>\r\n";
